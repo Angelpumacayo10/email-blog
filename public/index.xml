@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title> on Angel  </title>
+      <generator uri="https://gohugo.io">Hugo</generator>
+    <link>https://angelpumacayo10.github.io/email-blog/index.xml</link>
+    <language>en-us</language>
+    
+    
+    <updated>Wed, 09 Nov 2016 13:34:21 PST</updated>
+    
+    <item>
+      <title>Fundamentals of building Email Templates</title>
+      <link>https://angelpumacayo10.github.io/email-blog/post/welcome/</link>
+      <pubDate>Wed, 09 Nov 2016 13:34:21 PST</pubDate>
+      
+      <guid>https://angelpumacayo10.github.io/email-blog/post/welcome/</guid>
+      <description>
+
+&lt;h3 id=&#34;important-when-designing-html-emails&#34;&gt;Important when designing HTML Emails:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Should be 600-800 pixels maximum width.&lt;/li&gt;
+&lt;li&gt;Design for Simplicity.&lt;/li&gt;
+&lt;li&gt;Emails that are one large image perform poorly.&lt;/li&gt;
+&lt;li&gt;Use basic, cross platform fonts; Arial, Verdana, Georgia, Times New Roman.&lt;/li&gt;
+&lt;li&gt;Avoid elements that require FLASH or JS, if you need motion in your email, a .gif is your best bet.&lt;/li&gt;
+&lt;li&gt;Mobile experience is key, email has to be readable on small screens and make sure links are easy to press with thumb.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;best-development-practices&#34;&gt;Best Development Practices:&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Code all structure using table elements, for more complicated layouts nest tables to build complex structures.&lt;/li&gt;
+&lt;li&gt;Element attributes, (cellpadding, align, width) to set table dimensions. This forces a box-model structure.&lt;/li&gt;
+&lt;li&gt;Keep CSS simple, avoid compound style declarations: (IE: “font: #000 1px Arial, Helvetica, Sans-Serif;”).&lt;/li&gt;
+&lt;li&gt;Avoid CSS layout properties (IE: slot, position, clear, visibility etc).&lt;/li&gt;
+&lt;li&gt;Avoid complex selectors (IE: descendant, child, or sibling selectors, and pseudo elements).&lt;/li&gt;
+&lt;li&gt;Inline all CSS before sending (Some builders will do this for you automatically : Mailchimp).&lt;/li&gt;
+&lt;li&gt;Use absolute links for images and host those images on a reliable server(Mailchimp provides free image hosting).&lt;/li&gt;
+&lt;li&gt;Don’t bother with Javascript or FLASH. Those technologies are largely unssupported by email clients.&lt;/li&gt;
+&lt;li&gt;Account for mobile-friendliness.&lt;/li&gt;
+&lt;li&gt;Use media queries to increase text size on small screens, provide thumb-sized (46px-46px) hit areas for links.&lt;/li&gt;
+&lt;li&gt;Make an email responsive if the design allows it.&lt;/li&gt;
+&lt;li&gt;TEST, TEST, TEST. Create email accounts across various services, and send emails to yourself. Do this is conjunction with services such as litmus.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;building-an-html-email&#34;&gt;Building an HTML Email:&lt;/h3&gt;
+
+&lt;p&gt;Before we begin you will need a working knowledge of HTML, CSS, media queries and the use of some external resources. At its core an HTML email is an HTML file, the code that we write is viewed in email clients, in which you would visit a Url like gmail.com to acess your email or yahoo.com to acess your yahoo mail. The other type of clients are native applications, one popular version of this for microsoft operating systems is called Microsoft Outlook and for IOS clients is the mailbox application.&lt;/p&gt;
+
+&lt;p&gt;In modern front-end development we are used to writing code that is viewed in browsers, those browsers use rendering engines to interpret the HTML and CSS that we write, email clients have this same process but they have an additional step too, they use a pre-processor that will actually change your HTML. The original purpose for a processor is to protect the client from harmful code, now pre-processors are your strongest opponents, they:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Removes or changes HTML tags&lt;/li&gt;
+&lt;li&gt;Removes or changes CSS&lt;/li&gt;
+&lt;li&gt;Overrides styles with APP CSS&lt;/li&gt;
+&lt;li&gt;Changes the entire document structure&lt;/li&gt;
+&lt;li&gt;Removes all Javascript.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Gmail has the most aggressive pre processor of all, very unfortunate because it’s one of the most popular email clients out there. The combination of its popularity and pre processor affects the way you have to write your HTML and CSS. This is what Gmails pre processor does:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Removes any link tags, this means if you have any external style sheets, they would be removed.&lt;/li&gt;
+&lt;li&gt;Overrides styles with its own version; APP CSS.&lt;/li&gt;
+&lt;li&gt;Changes the entire document structure.&lt;/li&gt;
+&lt;li&gt;Removes style tags - this means that we can’t CSS in an external stylesheet, and you also can’t lump together CSS properties in a style tag to apply to HTML elements.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Let’s get started, this would be the start of your basic HTML email:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;utf-8&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; San Jose Earthquakes Try Outs &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;viewport&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;width=device-width, initial-scale=1&amp;quot;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;http-equiv&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;X-UA-compatible&amp;quot;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;IE-edge&amp;quot;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;quot;margin: 0; padding: 0;&amp;quot;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;img&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”http://images.footballfanatics.com/partners/MLS/San%20Jose%20Earthquakes/MLS_TLP_Header_Earthquakes4.jpg”&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;alt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”Earthquakes&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Online&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Store&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Webstie&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Logo&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”600”&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that every time you are adding an image to an HTML email, you need to use an absolute Url, the image needs to be stored in an a server and accessible, you can reference to it by using an absolute path, this is one big difference between email HTML and website HTML, all of the the images should have an absolute Url. To add writing or content to the page you can use the h1 and p tags.&lt;/p&gt;
+
+&lt;p&gt;When building an HTML email it is really important to stay organized, i cannot emphasize this enough, you really want to stay organized. To stay organized i would suggest leaving comments on top of your tables or divs. It is best practice for HTML email developers to do this, use a comment to indicate what the table below is for, it can be a comment to give you an idea of what the code below is referencing, something to help you and maybe someone you are working with stay organized. This makes it easy to scan your code your code and believe me it will help you in the long run because HTML table can get really bloated, and you can get lost in this code at times.&lt;/p&gt;
+
+&lt;p&gt;Knowing what pre processors are capable of, and since you don’t have support for external stylesheets or style tags, inline styles must be used. This is how you would add inline attributes to an image tag:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;img&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”img/quakes.jpg”&lt;/span&gt;
+  &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#39;&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;    background-color: #123332;&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;    display: block;&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;    max-width: 100%;&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;    padding: 12px 0;&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;    width: 600&lt;/span&gt;
+&lt;span class=&#34;s&#34;&gt;  &amp;#39;&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can add CSS attributes with CSS properties inline, it would be the same process to add it to an h1 tag, let me show you:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   &amp;lt;h1 style=”
+       color: #845679;
+       font-family; ‘Arial Black’;
+       font-size; 74px;
+       line-height; 74px;
+       margin: 0;
+       text-transform: uppercase; &amp;gt;
+     Email Title &amp;lt;/h1&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One thing to note is that because you can’t reference an area of CSS, we have to include any reset styles to very element that we want to reset. Margin: 0; would counter any browser behavior that would add spacing to our h1 tag.&lt;/p&gt;
+
+&lt;p&gt;Another problem that you will encounter will be that you will want the content of your elements to be aligned and have equal widths, you can fix this by adding a div around all of your current content and apply as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   &amp;lt;div style=”
+        margin: 0 auto;
+        max-width: 600px; &amp;gt;
+    &amp;lt;img …….&amp;gt;
+     &amp;lt;h1 …….&amp;gt;
+      &amp;lt;p ….&amp;gt;
+       &amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Margin: 0 auto; to center everything and applying max-width so that it never gets bigger 600 pixels. You can also add the text-align attribute to your div so that it can cascade down to all of the text inside the div.&lt;/p&gt;
+
+&lt;p&gt;To add a background you will need to add a div around your current content container and apply a background color and background image as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   &amp;lt;div style=”
+         background-color: #444544;
+         background-image: Url(“... bgimage.png”); &amp;gt;
+   &amp;lt;div ……..&amp;gt;
+    &amp;lt;img……..&amp;gt;
+     &amp;lt;h1 ……..&amp;gt;
+      &amp;lt;p ……….&amp;gt;
+       &amp;lt;/div&amp;gt;
+    &amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;MICROSFT OUTLOOK:&lt;/p&gt;
+
+&lt;p&gt;Outlook 2003-2013 use different rendering engines, prior to 2007 word used internet explorer for its rendering engine, 2007 and later uses microsoft word. Word lacks box mode and positioning support, everything that you could think of that you would use to create a layout in CSS is not supported by it, let me show you what outlook does not support:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;          Height | Display | Float | Position | Width | Padding
+ Outlook         |         |       |          |       |
+2007-2013    X   |   X     |   X   |    X     |  !!!  |  !!!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see outlook gives us little to work with and the width and padding are only supported on table elements. You should absolutely avoid using tables for layouts when building web pages, however they are a necessity for HTML emails because of the lack of CSS support.
+Table usually use many semantic elements to create their structure, however that would be too much code than you would actually need for your layouts, it’s better to use simplified tables. For the majority of the time you will only need to use table elements, table row elements and table cell elements.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   &amp;lt;!--WRAPPER HEADER--&amp;gt;
+
+    &amp;lt;table border=”0” cellpadding=”0” cellspacing=”0”&amp;gt;
+      &amp;lt;tr&amp;gt;
+        &amp;lt;td&amp;gt;
+          &amp;lt;!---content---&amp;gt;
+        &amp;lt;/td&amp;gt;
+      &amp;lt;/tr&amp;gt;
+    &amp;lt;/table&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Many clients apply default spacing in order to space out tables, in order to counter this you will need to use HTML attributes and them add to the table as shown up top. ALL TABLES WILL NEED TO HAVE THESE RESET ATTRIBUTES.&lt;/p&gt;
+
+&lt;p&gt;All of the content must go in a table cell, the word rendering engine has very minimal support for styles on any HTML elements except for the table and table cell, this means we need to divide our content into individual table in order for them be styled, like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;…&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”600”&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;background-color:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;577374&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;padding:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;12px&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;img&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”…..groundimage.png”&lt;/span&gt;
+             &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;display:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;block&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;max-width&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;”&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;%&amp;quot;;&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”600”&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&amp;gt;&lt;/span&gt;
+          &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+           &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”&lt;/span&gt;
+                &lt;span class=&#34;na&#34;&gt;color:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;754674&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+                &lt;span class=&#34;na&#34;&gt;font-family:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;‘&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Arial&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Black&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;’;&lt;/span&gt;
+                &lt;span class=&#34;na&#34;&gt;font-size:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;74px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+                &lt;span class=&#34;na&#34;&gt;line-height:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;74px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+                &lt;span class=&#34;na&#34;&gt;padding:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;5px&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;10px&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+                &lt;span class=&#34;na&#34;&gt;text-transform:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;uppercase&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+           San Jose Earthquakes Try Outs!&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Earlier we applied our styles to the image tag, however to get the best support we want to apply our bgcolor and padding to the, type styles need to be applied to the table cell. One nice thing is that you don’t have to include any reset CSS because we are not getting any default styles applied to our table cell.&lt;/p&gt;
+
+&lt;p&gt;Like before we are going to apply our text-align: center to our containing element. The reason why we are not bringing our font styles to the table level to only be set once is because different rendering engines set default styles to the table cells, chrome sets font-family to Arial, AOl goes ahead and sets the color black on td’s. In table elements you can use the align attribute to center all the content. Now to add a background to our layout you will need to wrap the table with all of your content inside of another table and add the background to the new table like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;…&lt;/span&gt;
+           &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”&lt;/span&gt;
+           &lt;span class=&#34;na&#34;&gt;background-color:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;547389&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+           &lt;span class=&#34;na&#34;&gt;background-image&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Url&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;(“&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;bd-example&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;png&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;”);&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;
+           &lt;span class=&#34;na&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”100%”&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;…..&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;  ← content table
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;REMEMBER TO ALWAYS KEEP TESTING YOUR WORK WITH DIFFERENT EMAIL CLIENTS.&lt;/p&gt;
+
+&lt;p&gt;Multiple tables and nested tables help to build a layout, it is important to know that each section needs a new table, you can use nested tables inside tables if you have more than 1 content area. If you wanted to create space between the header and the tables below, you would usually use margin, however you get varied result in clients when using margin and outlook.com specifically doesn’t support it, instead you can use padding.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”padding-top:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;25px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;img&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;…….&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To create a table with 2 columns you can use a wrapper table with 2 cells to align the content, the default behavior will align them side by side. Remember that the content in the column needs to be in its own table for styling, you can use cellpadding to separate the 2  columns.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;…….&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”padding-right:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;10px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;”&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;bgcolor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”#654434”&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;…...&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+          ……..
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”padding-left:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;10px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;”&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;bgcolor&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”#544544”&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;……”&lt;/span&gt;
+             &lt;span class=&#34;na&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”290”&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;img&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;…..&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Remember styles are applied to the cells for each bit of content. To style a cell with multiple font sizes and styles you will need to wrap a span around each area of the text that you want to be styled differently. Here is an example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”&lt;/span&gt;
+             &lt;span class=&#34;na&#34;&gt;font-family&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Arial&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+             &lt;span class=&#34;na&#34;&gt;font-size:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;14px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+             &lt;span class=&#34;na&#34;&gt;font-weight:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;bold&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+             &lt;span class=&#34;na&#34;&gt;line-height:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;14px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+             &lt;span class=&#34;na&#34;&gt;padding-top:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;5px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;span&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;font-family:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;‘&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Arial&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Black&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;’;&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;font-size:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;28px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;line-height:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;28px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+           Ages 14-24&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;span&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;span&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;font-family:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;‘&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Arial&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Black&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;’;&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;font-size:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;30px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;line-height:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;30px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         $100 Fee&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;span&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         Open to public
+         &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;REMEMBER TO KEEP TESTING YOUR WORK IN DIFFERENT RENDERING ENGINES!! ITS VERY IMPORTANT!.&lt;/p&gt;
+
+&lt;p&gt;Using Media Queries:&lt;/p&gt;
+
+&lt;p&gt;The basic use of media queries in HTML emails would be to adjust your layout for smaller screens. Let’s say you are using a 600px wide table but you only have a 320px container, it just would not fit, the solution for that would be to use CSS to force the width of the table to be 100% of the container. This would be ok because any client that would support media queries would also support CSS in a style tag. Once we create a rule we can apply that rule to each table using a class attribute. While we would want these styles to apply to any client that does support media queries, we don’t want it to always impact our tables, we only want this width of 100% to apply when our screen is less than 600 pixels, so as you can see in the code below i added a media query with a max-width of 600 pixels to hold that rule.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;k&#34;&gt;@media&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;screen&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;and&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;max-width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;600px&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+         &lt;span class=&#34;nc&#34;&gt;.width-full&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+          &lt;span class=&#34;nb&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;100%&lt;/span&gt; &lt;span class=&#34;cp&#34;&gt;!important&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+
+             &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+                ……….
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;……&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”width-full”&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;”&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”600”&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+                ………….
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”width-full”&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;”&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”600”&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+                ………….
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”width-full”&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;”&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”600”&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+                ………….
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Another problem you will run into will be having to stack columns on small screens, this usually happens when you have multiple table cells in a row that won’t all fit in one row on a small screen, you will need a way to override the default behavior for the table cells. For this you will need to add a class to the table cells and on the style tag use the proper attributes to force stacking and use 100% of the width. Once your table cells are stacked on top of each other you will noticed that they are not aligned, there seems to be a problem with the padding, this is because of the padding that we added for the 600 pixels layout, it will affect the way it renders in small screens, you will need to override this, to do this all you will need to do is reset the padding for that table cell with the “ !important “ declarative. Below is an example of how to handle these 2 problems:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;k&#34;&gt;@media&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;screen&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;max-width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;600px&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+           &lt;span class=&#34;err&#34;&gt;…&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;..&lt;/span&gt;
+         &lt;span class=&#34;nc&#34;&gt;.stack-column&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+            &lt;span class=&#34;nb&#34;&gt;display&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;block&lt;/span&gt; &lt;span class=&#34;cp&#34;&gt;!important&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+            &lt;span class=&#34;nb&#34;&gt;padding&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;cp&#34;&gt;!important&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+            &lt;span class=&#34;nb&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;100%&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+           …..
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+          ……...
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;table&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;…..&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”width-full”&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;width&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”600”&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”stack-column”&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;padding-right:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;10px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+             …………..
+          &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”stack-column”&lt;/span&gt;
+              &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;padding-right:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;10px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+             ………
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There will be times when you get inconsistent results with your font-family, it’s usually because the font you choose might not be available on all operating systems, for this you will need to create fallbacks. The fallbacks will need to be updated on every cell and span that contains a font-family. Here is an example of how to use fallbacks:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;          ………
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;“&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;….&lt;/span&gt;
+            &lt;span class=&#34;na&#34;&gt;font-family:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Arial&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;”&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Arial&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Black&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;”&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;,&lt;/span&gt;
+            &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;Arial&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Bold&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;”&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;sans-serif&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;”;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;…&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+       Soccer Tryouts!!&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Don’t forget to add it to every cell and span, it is a long process but using classes, attributes, and declarations would be how to adjust your layout for other platforms and small screens. You will need to target a client and override their multiple properties using classes to target what you want to override and attributes with the “!important” declaration to make sure it renders properly.
+Like i mentioned before Word and Outlooks rendering engines have many issues, but lucky for us there are specific ways for us to target individual Outlook clients and its versions, to target all versions of Microsoft Outlook you can use a conditional comment and to target a specific version of Outlook you can use an operator.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;c&#34;&gt;&amp;lt;!-- [if mso]&amp;gt;             &amp;lt;!--[if gte mso 11]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;            ……                         ……..&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;         &amp;lt;![endif]--&amp;gt;&lt;/span&gt;               &lt;span class=&#34;cp&#34;&gt;&amp;lt;![endif]--&amp;gt;&lt;/span&gt;
+
+
+      -Conditional Comment-           -Operator-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The gte operator on the top right will target Microsoft Outlook versions 2011 and higher. Inside conditional comments you can override attributes using classes to fix the layout of the specific client you’re targeting.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;c&#34;&gt;&amp;lt;!--[if gte mso 11]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;        &amp;lt;style&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;         .email-header {&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;           padding-bottom: 0 !important;   }&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;        &amp;lt;/style&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;       &amp;lt;![endif]--&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Microsoft Word Processor ignores line-height on inline elements.
+Use &amp;amp;nbsp for empty cells or else the empty cells will be applied default settings.
+Keep testing and always use HTML attributes when possible, that’s going to give you the best rendering across all different clients.&lt;/p&gt;
+
+&lt;p&gt;Adding a button to your email:&lt;/p&gt;
+
+&lt;p&gt;Now to keep adding content to our email we are going to add a button that will work in multiple clients, typically the way you would add a button would be to create an anchor tag and add a bunch of styles to it. This would work in any clients that would use browser based rendering engines but it would not work on the Word rendering engine, the way i learned how to is actually pretty simple, fast, and effective. There is an excellent resource online created by stig at campaign monitor, buttons.cm generates code for the button with a conditionalcomment for using VML(Vector Markup Language). Buttons.cm allows you to create a button using inner values and outputs 2 versions of a button, one that would use VML and HTML that would render in the Word rendering engine, and one using just HTML to render in all other rendering engines. It is pretty simple to use, the first step would be to put the code for the button into a table cell on our email, once you add the code i would recommend to test it right away to see how it renders in multiple clients. If you’re having a consistent experience but it does not match your design exactly how you want it to you will need to go through a two step process to edit and style the button. The first step would be to set styles on the center tags, once you apply your styles and make your changes i recommend to test it on different rendering engines again, you should notice that these changes are only taking place on clients using the Word rendering engine. These changes are only visible in Outlook using Word because the VML is wrapped around a conditional tag that is targeting specifically microsoft Outlook. Here below is an example of how this would look like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;……..&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         &lt;span class=&#34;c&#34;&gt;&amp;lt;!--[if mso]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;          &amp;lt;v:roundrect …..&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;            ………..&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;       &amp;lt;center style=” color: #ffffff;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;                font-family: Arial, sans serif;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;                font-size: 22px;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;                font-weight: bold;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;                text-transform: uppercase; “&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;         Buy Tickets &amp;lt;/center&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;           &amp;lt;/v:roundrect&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;c&#34;&gt;          &amp;lt;![endif]--&amp;gt;&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The second step would be to update the styles of your button on the remaining clients, it is as easy as editing your HTML:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;href&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”https:sanjoseearthquaketickets.org”&lt;/span&gt;
+           &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;background-color:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;938acb&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;border:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;1px&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;solid&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;938383&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;border-radius:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;4px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;color:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;dfdfdf&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;display:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;inline-block&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;font-family:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Arial&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Bold&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;sans-serif&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;font-size:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;20px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;font-weight:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;bold&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;line-height:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;55px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;text-align:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;center&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;width:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;270px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+               &lt;span class=&#34;na&#34;&gt;mso-hide:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;all&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         Buy Tickets&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;One thing to note is that the reason why these styles get hidden from microsoft word is because of the vendor property mso-hide: all.&lt;/p&gt;
+
+&lt;p&gt;Some preprocessors add links as a feature:&lt;/p&gt;
+
+&lt;p&gt;Let’s say you have a phone number included on your footer, the phone number is in its own table row and table cell just like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;align&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”center”&lt;/span&gt;
+            &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”color:&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;#&lt;/span&gt;&lt;span class=&#34;na&#34;&gt;ffffff&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+            &lt;span class=&#34;na&#34;&gt;font-family:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Arial&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;sans-serif&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+            &lt;span class=&#34;na&#34;&gt;font-weight:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;bold&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+            &lt;span class=&#34;na&#34;&gt;padding:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;30px&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+       For more info call 1650-555-555
+        &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;tr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you would take a look at this code in apple’s preprocessor you would see that the numbers we have added have turned into a link, so now you have a default link in your email that does not match the design you want. You don’t have access to the HTML that created the link but lucky for us apple mail does support CSS in a style tag, so you can use a class to target and style the anchor tag.&lt;/p&gt;
+
+&lt;p&gt;Use a span and add a class to target specific links.&lt;/p&gt;
+
+&lt;p&gt;Another encounter i had with the apple rendering engine was recently when i was trying to change the font-size of some of the content on my footer, i was trying to make the text smaller than 14px, unfortunately some clients won’t allow this, apple for instance will render type at a minimum of 14px by default. 14px on a footer could be over-dramatized for the viewing audience, lucky for us there are vendor specific properties that exist to override these defaults, webkit and microsoft allow a text-size adjustment that will make it so your text will render at the specific pixel value that you set. Let me show you how this is done below:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span&gt;&lt;/span&gt;       &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;td&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;…..&lt;/span&gt;
+         &lt;span class=&#34;na&#34;&gt;style&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;”....&lt;/span&gt;
+         &lt;span class=&#34;na&#34;&gt;font-size:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;5px&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+         &lt;span class=&#34;na&#34;&gt;-ms-text-size-adjust:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;none&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt;
+         &lt;span class=&#34;na&#34;&gt;-webkit-text-size-adjust:&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;none&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+         2550 San Jose Drive No. 155
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;br&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        Santa Clara Complex
+       &lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;br&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+        CA 94063
+         ………..
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,3 +1,14 @@
-title = "Email Blog Site"
+
+title = "Angel "
+author = "Angel Pumacayo"
 languageCode = "en-us"
-baseurl = "http://replace-this-with-your-hugo-site.com/"
+theme =  "hugo-uno"
+builddrafts = false
+pygmentsuseclasses = true
+PygmentsCodeFences = true
+
+baseurl = "https://angelpumacayo10.github.io/email-blog/"
+
+[Params]
+  Author = "Angel Pumacayo"
+  disqus = "disqusUsername"
