@@ -110,15 +110,16 @@ Knowing what pre processors are capable of, and since you don’t have support f
 You can add CSS attributes with CSS properties inline, it would be the same process to add it to an h1 tag, let me show you:
 
 
-       <h1 style=”
-           color: #845679;
-           font-family; ‘Arial Black’;
-           font-size; 74px;
-           line-height; 74px;
-           margin: 0;
-           text-transform: uppercase; >
-         Email Title </h1>
-
+``` html
+<h1 style='
+  color: #845679;
+  font-family; ‘Arial Black’;
+  font-size; 74px;
+  line-height; 74px;
+  margin: 0;
+  text-transform: uppercase; '>
+  Email Title</h1>
+```
 
 One thing to note is that because you can’t reference an area of CSS, we have to include any reset styles to very element that we want to reset. Margin: 0; would counter any browser behavior that would add spacing to our h1 tag.
 
@@ -126,14 +127,15 @@ One thing to note is that because you can’t reference an area of CSS, we have 
 Another problem that you will encounter will be that you will want the content of your elements to be aligned and have equal widths, you can fix this by adding a div around all of your current content and apply as follows:
 
 
-       <div style=”
-            margin: 0 auto;
-            max-width: 600px; >
-        <img …….>
-         <h1 …….>
-          <p ….>
-           </div>
-
+``` html
+<div style='
+  margin: 0 auto;
+  max-width: 600px; '>
+ <img……>
+ <h1……>
+ <p…>
+</div>
+```
 
 Margin: 0 auto; to center everything and applying max-width so that it never gets bigger 600 pixels. You can also add the text-align attribute to your div so that it can cascade down to all of the text inside the div.
 
@@ -141,30 +143,31 @@ Margin: 0 auto; to center everything and applying max-width so that it never get
 To add a background you will need to add a div around your current content container and apply a background color and background image as follows:
 
 
-       <div style=”
-             background-color: #444544;
-             background-image: Url(“... bgimage.png”); >
-       <div ……..>
-        <img……..>
-         <h1 ……..>
-          <p ……….>
-           </div>
-        </div>
+``` html
+<div style='
+      background-color: #444544;
+      background-image: Url(“... bgimage.png”); '>
+    <div ……>
+    <img……>
+    <h1 ……>
+    <p ………>
+   </div>
+  </div>
+```
 
-
-MICROSFT OUTLOOK:
+### MICROSFT OUTLOOK:
 
 
 Outlook 2003-2013 use different rendering engines, prior to 2007 word used internet explorer for its rendering engine, 2007 and later uses microsoft word. Word lacks box mode and positioning support, everything that you could think of that you would use to create a layout in CSS is not supported by it, let me show you what outlook does not support:
 
 
-
+``` html
 
               Height | Display | Float | Position | Width | Padding
      Outlook         |         |       |          |       |
     2007-2013    X   |   X     |   X   |    X     |  !!!  |  !!!
 
-
+```
 
 
 As you can see outlook gives us little to work with and the width and padding are only supported on table elements. You should absolutely avoid using tables for layouts when building web pages, however they are a necessity for HTML emails because of the lack of CSS support.
@@ -297,7 +300,7 @@ Remember styles are applied to the cells for each bit of content. To style a cel
 REMEMBER TO KEEP TESTING YOUR WORK IN DIFFERENT RENDERING ENGINES!! ITS VERY IMPORTANT!.
 
 
-Using Media Queries:
+### Using Media Queries:
 
 
 The basic use of media queries in HTML emails would be to adjust your layout for smaller screens. Let’s say you are using a 600px wide table but you only have a 320px container, it just would not fit, the solution for that would be to use CSS to force the width of the table to be 100% of the container. This would be ok because any client that would support media queries would also support CSS in a style tag. Once we create a rule we can apply that rule to each table using a class attribute. While we would want these styles to apply to any client that does support media queries, we don’t want it to always impact our tables, we only want this width of 100% to apply when our screen is less than 600 pixels, so as you can see in the code below i added a media query with a max-width of 600 pixels to hold that rule.
